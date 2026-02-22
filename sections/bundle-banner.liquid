@@ -1,0 +1,193 @@
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+
+<section class="bundle-banner">
+  <div class="bundle-banner__inner">
+
+    <div class="bundle-banner__content">
+      <h2 class="bundle-banner__heading">
+        {{ section.settings.heading }}
+      </h2>
+
+      <p class="bundle-banner__subheading">
+        {{ section.settings.subheading }}
+      </p>
+    </div>
+
+    <div class="bundle-banner__media">
+      {% if section.settings.product_image %}
+        <img 
+          src="{{ section.settings.product_image | image_url: width: 1600 }}"
+          alt="{{ section.settings.product_image.alt | escape }}"
+          loading="lazy"
+        >
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+
+<style>
+
+
+.bundle-banner {
+  width: 100%;
+  background-color: #082D35;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  overflow: hidden;
+  color: #ffffff;
+  position: relative;
+}
+
+
+
+.bundle-banner__inner {
+  display: block;
+}
+
+.bundle-banner__media {
+  width: 100%;
+  height: 60vh;
+  position: relative;
+}
+
+.bundle-banner__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.bundle-banner__media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(8,45,53,0) 0%,
+    rgba(8,45,53,0) 40%,
+    rgba(8,45,53,0.23) 75%,
+    #082D35 100%
+  );
+  z-index: 2;
+}
+
+.bundle-banner__content {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  width: 100%;
+  padding: 0 24px;
+  z-index: 3;
+  margin-top: 110px;
+}
+
+.bundle-banner__heading {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 30px;
+  line-height: 38px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.bundle-banner__heading span {
+  color: #00BCDD;
+}
+
+.bundle-banner__subheading {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+
+
+@media (min-width: 1024px) {
+
+  .bundle-banner {
+    max-width: 1440px;
+    height: 482px;
+    margin: 0 auto;
+  }
+
+  .bundle-banner__inner {
+    display: flex;
+    height: 100%;
+  }
+
+  .bundle-banner__content {
+    position: relative;
+    width: 50%;
+    padding-left: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .bundle-banner__heading {
+    font-size: 38px;
+    line-height: 48px;
+    max-width: 520px;
+  }
+
+  .bundle-banner__subheading {
+    font-size: 21px;
+    line-height: 27px;
+    max-width: 600px;
+  }
+
+  .bundle-banner__media {
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .bundle-banner__media::before {
+    background: linear-gradient(
+      to right,
+      #082D35 0%,
+      rgba(8,45,53,0.95) 20%,
+      rgba(8,45,53,0.6) 45%,
+      rgba(8,45,53,0.2) 65%,
+      rgba(8,45,53,0) 85%
+    );
+  }
+
+  .bundle-banner__media img {
+    width: 115%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 90% center;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Bundle Banner",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Smart stack, smarter price - shop curated bundles and <strong>save 30%</strong>."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Clinically informed formulas that support energy, balance, and everyday wellness."
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle Banner"
+    }
+  ]
+}
+{% endschema %}
